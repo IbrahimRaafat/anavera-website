@@ -24,7 +24,7 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-grid-pattern pointer-events-none" />
       <div className="absolute inset-0 bg-radial-teal pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-6 pt-28 pb-12 lg:py-32 w-full">
+      <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-10 lg:py-32 w-full">
         <div className="grid lg:grid-cols-[5fr_7fr] gap-10 items-center">
 
           {/* Left — text */}
