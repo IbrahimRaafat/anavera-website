@@ -20,12 +20,12 @@ const dashboards = [
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-white">
+    <section className="relative lg:min-h-screen flex items-center overflow-hidden bg-white">
       <div className="absolute inset-0 bg-grid-pattern pointer-events-none" />
       <div className="absolute inset-0 bg-radial-teal pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-6 py-32 w-full">
-        <div className="grid lg:grid-cols-[5fr_7fr] gap-12 items-center">
+      <div className="relative max-w-7xl mx-auto px-6 pt-28 pb-12 lg:py-32 w-full">
+        <div className="grid lg:grid-cols-[5fr_7fr] gap-10 items-center">
 
           {/* Left — text */}
           <motion.div
@@ -69,10 +69,10 @@ export function HeroSection() {
 
           {/* Right — carousel */}
           <motion.div
-            initial={{ opacity: 0, x: 32 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.35 }}
-            className="w-full"
+            className="w-full overflow-hidden"
           >
             <DashboardCarousel
               items={dashboards}
