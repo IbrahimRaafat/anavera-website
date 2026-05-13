@@ -114,7 +114,7 @@ export default function UseCasesPage() {
             initial="hidden"
             whileInView="visible"
             viewport={viewport}
-            className="grid grid-cols-3 gap-4"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-4"
           >
             {stats.map((s) => (
               <motion.div

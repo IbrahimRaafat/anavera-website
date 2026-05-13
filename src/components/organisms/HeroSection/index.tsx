@@ -1,28 +1,24 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button, Badge, GlowDot } from "@/components/atoms";
 import { fadeUp, staggerContainer, viewport } from "@/design-system/animations";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-white">
-      {/* Subtle grid */}
+    <section className="relative overflow-hidden bg-white">
       <div className="absolute inset-0 bg-grid-pattern pointer-events-none" />
-      {/* Teal radial glow top */}
       <div className="absolute inset-0 bg-radial-teal pointer-events-none" />
-      {/* Soft teal orb */}
-      <div className="absolute top-1/4 right-1/4 size-[500px] rounded-full bg-teal/5 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/3 left-1/4 size-80 rounded-full bg-sky/5 blur-3xl pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-6 py-32 w-full">
+      <div className="relative max-w-7xl mx-auto px-6 pt-32 pb-16 w-full">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
-          className="max-w-4xl"
+          className="max-w-3xl"
         >
           {/* Eyebrow */}
           <motion.div variants={fadeUp} className="flex items-center gap-3 mb-6">
@@ -36,7 +32,7 @@ export function HeroSection() {
           {/* Headline */}
           <motion.h1
             variants={fadeUp}
-            className="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-text leading-tight tracking-tight mb-6"
+            className="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl text-text leading-tight tracking-tight mb-6"
           >
             From Sensor Data
             <br />
@@ -60,50 +56,36 @@ export function HeroSection() {
                 Explore Use Cases
               </Button>
             </Link>
-            <Link href="/platform">
+            <Link href="/contact">
               <Button size="lg" variant="secondary">
-                Our Platform
+                Contact Us
               </Button>
             </Link>
           </motion.div>
-
-          {/* Quick nav pills */}
-          <motion.div variants={fadeUp} className="flex flex-wrap gap-2 mt-10">
-            {[
-              "Power Efficiency", "Cold Chain", "Smart Office",
-              "Fuel Monitoring", "Agriculture", "Healthcare",
-            ].map((label) => (
-              <span
-                key={label}
-                className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white border border-border shadow-sm text-xs text-text-muted font-heading hover:border-teal/40 hover:text-teal transition-colors cursor-default"
-              >
-                <ChevronRight size={10} className="text-teal" />
-                {label}
-              </span>
-            ))}
-          </motion.div>
         </motion.div>
 
-        {/* Stats strip */}
+        {/* Dashboard image */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.4 }}
           viewport={viewport}
-          className="mt-20 grid grid-cols-2 sm:grid-cols-4 gap-px bg-border rounded-xl overflow-hidden border border-border shadow-sm"
+          className="mt-16"
         >
-          {[
-            { value: "7",          label: "Industry Use Cases" },
-            { value: "3",          label: "Hardware Partners" },
-            { value: "15 km",      label: "LoRaWAN Coverage" },
-            { value: "Real-time",  label: "Data Intelligence" },
-          ].map(({ value, label }) => (
-            <div key={label} className="bg-white px-6 py-5 flex flex-col gap-1">
-              <span className="font-heading font-bold text-2xl text-gradient-teal">{value}</span>
-              <span className="text-text-muted text-xs">{label}</span>
-            </div>
-          ))}
+          <div className="rounded-2xl overflow-hidden border border-border shadow-[0_8px_48px_rgba(0,149,163,0.12)]">
+            <Image
+              src="/dashboards/overview.png"
+              alt="Anavera IoT Platform — Live Overview Dashboard"
+              width={1200}
+              height={675}
+              className="w-full h-auto"
+              priority
+            />
+          </div>
+          <p className="text-text-muted text-sm text-center italic mt-3">
+            Anavera IoT Platform — Overview Dashboard showing all 7 use cases in real-time
+          </p>
         </motion.div>
       </div>
     </section>

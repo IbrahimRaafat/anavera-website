@@ -152,7 +152,7 @@ export function UseCaseDetail({ useCase }: { useCase: UseCase }) {
             <motion.p variants={fadeUp} className="text-xs font-heading font-semibold uppercase tracking-widest text-teal">
               Measurable Impact
             </motion.p>
-            <motion.div variants={fadeUp} className="grid grid-cols-3 gap-4">
+            <motion.div variants={fadeUp} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {useCase.impactStats.map((stat) => (
                 <div
                   key={stat.label}
