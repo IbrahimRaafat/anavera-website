@@ -53,11 +53,6 @@ function CarouselItem({
         className="w-full h-auto block"
         draggable={false}
       />
-      <div className="absolute bottom-3 left-3 pointer-events-none">
-        <span className="inline-flex items-center rounded-full border border-teal bg-white/90 px-4 py-1.5 text-sm font-heading font-semibold text-teal">
-          {item.label}
-        </span>
-      </div>
     </motion.div>
   );
 }

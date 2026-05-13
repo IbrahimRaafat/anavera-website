@@ -25,7 +25,7 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-radial-teal pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6 py-32 w-full">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-[5fr_7fr] gap-12 items-center">
 
           {/* Left — text */}
           <motion.div
