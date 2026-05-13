@@ -38,10 +38,10 @@ export function HeroSection() {
               variants={fadeUp}
               className="font-heading font-bold text-4xl sm:text-5xl xl:text-6xl text-text leading-tight tracking-tight mb-6"
             >
-              From Sensor Data
+              Connectivity
               <br />
               to{" "}
-              <span className="text-gradient-teal">Operational Clarity</span>
+              <span className="text-gradient-teal">Clarity</span>
             </motion.h1>
 
             <motion.p
