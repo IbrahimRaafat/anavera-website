@@ -97,7 +97,7 @@ export function NavBar() {
                   isActive("/use-cases") ? "text-teal" : "text-text-muted hover:text-text",
                 )}
               >
-                Use Cases
+                Applications
                 <ChevronDown
                   size={14}
                   className={cn("transition-transform duration-200", dropdownOpen && "rotate-180")}
@@ -137,7 +137,7 @@ export function NavBar() {
                       href="/use-cases"
                       className="flex items-center justify-center gap-1.5 mt-2 pt-2 border-t border-border text-xs text-text-muted hover:text-teal transition-colors font-heading"
                     >
-                      View all use cases →
+                      View all Applications →
                     </Link>
                   </motion.div>
                 )}
@@ -197,7 +197,7 @@ export function NavBar() {
                 </Link>
               ))}
               <div className="pt-1">
-                <p className="px-4 text-xs text-text-subtle font-heading uppercase tracking-widest mb-1">Use Cases</p>
+                <p className="px-4 text-xs text-text-subtle font-heading uppercase tracking-widest mb-1">Applications</p>
                 {useCaseDropdown.map((item) => (
                   <Link
                     key={item.href}

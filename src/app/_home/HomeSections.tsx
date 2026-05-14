@@ -32,8 +32,8 @@ function UseCasesGrid() {
         >
           <motion.div variants={fadeUp} className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
             <SectionLabel
-              eyebrow="Use Cases"
-              heading="7 Industry Verticals"
+              eyebrow="Field Focus"
+              heading="Industry Verticals"
               description="Proven IoT applications built with subject matter experts, ready to deploy or fully customisable."
             />
             <Link href="/use-cases" className="shrink-0">
@@ -82,9 +82,6 @@ function CtaBanner() {
           <motion.div variants={fadeUp} className="flex flex-wrap gap-4 justify-center">
             <Link href="/contact">
               <Button size="lg" iconRight={<ArrowRight size={16} />}>Contact Us</Button>
-            </Link>
-            <Link href="/use-cases">
-              <Button size="lg" variant="secondary">Browse Use Cases</Button>
             </Link>
           </motion.div>
         </motion.div>

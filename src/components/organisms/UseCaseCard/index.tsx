@@ -60,18 +60,6 @@ export function UseCaseCard({ useCase, className }: UseCaseCardProps) {
           {useCase.tagline}
         </p>
 
-        {/* Hardware badges */}
-        <div className="flex flex-wrap gap-1.5 mt-4 mb-4">
-          {useCase.hardware.map((hw) => (
-            <span
-              key={hw}
-              className="text-[10px] font-mono px-2 py-0.5 rounded bg-border text-text-subtle border border-border-bright capitalize"
-            >
-              {hw}
-            </span>
-          ))}
-        </div>
-
         {/* Explore link */}
         <div className="flex items-center gap-1.5 text-text-muted group-hover:text-teal transition-colors text-sm font-heading font-medium">
           Explore
