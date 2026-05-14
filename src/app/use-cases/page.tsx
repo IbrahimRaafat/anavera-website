@@ -7,15 +7,6 @@ import { UseCaseCard } from "@/components/organisms/UseCaseCard";
 import { useCases } from "@/data/useCases";
 import { fadeUp, staggerContainer, viewport } from "@/design-system/animations";
 
-const differentiators = [
-  { title: "Own IoT Platform",       desc: "Cloud-native, scalable, deployable as-is or fully white-labeled and customized." },
-  { title: "Custom Development",     desc: "Full-stack IoT development from sensor firmware to mobile dashboards." },
-  { title: "LoRaWAN Expertise",      desc: "End-to-end LoRaWAN network design, deployment, and managed service delivery." },
-  { title: "Protocol Convergence",   desc: "Seamless integration between wired legacy sensors (Modbus, BACnet, RS485) and modern wireless technologies (LoRaWAN, NB-IoT, Wi-Fi)." },
-  { title: "AI & Machine Learning",  desc: "Predictive analytics, anomaly detection, demand forecasting, and intelligent automation built into every solution." },
-  { title: "Hardware Ecosystem",     desc: "Partnerships with Milesight, TEKTELIC, and Agatel for best-fit device selection." },
-];
-
 const stats = [
   { value: "7+",    label: "Industry Verticals" },
   { value: "15km+", label: "LoRaWAN Coverage" },
@@ -44,7 +35,7 @@ export default function UseCasesPage() {
               variants={fadeUp}
               className="font-heading font-bold text-4xl sm:text-5xl text-text leading-tight tracking-tight mb-4"
             >
-              About Anavera
+              Applications
             </motion.h1>
             <motion.p variants={fadeUp} className="text-teal text-xl font-heading font-semibold mb-6">
               Your Trusted IoT Platform Partner — Connectivity to Clarity
@@ -80,28 +71,6 @@ export default function UseCasesPage() {
                 Anavera IoT Platform — Overview Dashboard showing all 7 use cases in real-time
               </p>
             </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Our Differentiators */}
-      <section className="py-16 bg-bg-deep border-y border-border">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewport} className="flex flex-col gap-8">
-            <motion.p variants={fadeUp} className="text-xs font-heading font-semibold uppercase tracking-widest text-teal">
-              Our Differentiators
-            </motion.p>
-            <motion.ul variants={fadeUp} className="flex flex-col gap-4">
-              {differentiators.map((item) => (
-                <li key={item.title} className="flex items-start gap-3">
-                  <span className="size-1.5 rounded-full bg-teal mt-2.5 shrink-0" />
-                  <p className="text-text-muted leading-relaxed">
-                    <span className="font-heading font-semibold text-text">{item.title}: </span>
-                    {item.desc}
-                  </p>
-                </li>
-              ))}
-            </motion.ul>
           </motion.div>
         </div>
       </section>

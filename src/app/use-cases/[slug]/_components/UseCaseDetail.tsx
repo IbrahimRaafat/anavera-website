@@ -43,12 +43,6 @@ const iconMap: Record<string, React.ReactNode> = {
   MapPin:            <MapPin size={18} />,
 };
 
-const hardwareInfo: Record<string, { label: string; logo: string }> = {
-  milesight: { label: "Milesight IoT", logo: "/Milesight-Logo (3)(1).png" },
-  tektelic:  { label: "TEKTELIC",      logo: "/2- TEKTELIC logotype.png" },
-  agatel:    { label: "Agatel",        logo: "/3- Agatel-new logo-RGB.png" },
-};
-
 export function UseCaseDetail({ useCase }: { useCase: UseCase }) {
   return (
     <>
@@ -185,40 +179,6 @@ export function UseCaseDetail({ useCase }: { useCase: UseCase }) {
                 />
               </div>
               <p className="text-text-muted text-sm text-center italic">{useCase.dashboardCaption}</p>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Devices & Technology Used */}
-      <section className="py-16 bg-bg">
-        <div className="max-w-4xl mx-auto px-6">
-          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewport} className="flex flex-col gap-6">
-            <motion.div variants={fadeUp}>
-              <p className="text-xs font-heading font-semibold uppercase tracking-widest text-teal mb-3">Devices & Technology Used</p>
-              <p className="text-text-muted text-lg leading-relaxed">{useCase.devices}</p>
-            </motion.div>
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-3 pt-2">
-              {useCase.hardware.map((hw) => {
-                const info = hardwareInfo[hw];
-                return (
-                  <Link
-                    key={hw}
-                    href="/hardware-ecosystem"
-                    className="flex items-center rounded-xl bg-card border border-border hover:border-teal/40 transition-colors group p-2"
-                  >
-                    <div className="h-9 w-28 bg-white rounded flex items-center justify-center px-2 py-1.5 shrink-0">
-                      <Image
-                        src={info.logo}
-                        alt={info.label}
-                        width={96}
-                        height={32}
-                        className="object-contain w-full h-full"
-                      />
-                    </div>
-                  </Link>
-                );
-              })}
             </motion.div>
           </motion.div>
         </div>

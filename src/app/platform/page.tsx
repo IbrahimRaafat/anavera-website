@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Layers, Code2, Radio, GitMerge, BrainCircuit, Headphones } from "lucide-react";
+import { Layers, Code2, Radio, GitMerge, BrainCircuit, Headphones, Network, Cpu } from "lucide-react";
 import { PageLayout } from "@/components/templates/PageLayout";
 import { GlowCard } from "@/components/molecules";
 import { Badge } from "@/components/atoms";
@@ -49,6 +49,16 @@ const capabilities = [
     icon: <Headphones size={22} />,
     title: "Support",
     desc: "Dedicated technical support and ongoing platform management services.",
+  },
+  {
+    icon: <Network size={22} />,
+    title: "Protocol Convergence",
+    desc: "Seamless integration between wired legacy sensors (Modbus, BACnet, RS485) and modern wireless technologies (LoRaWAN, NB-IoT, Wi-Fi).",
+  },
+  {
+    icon: <Cpu size={22} />,
+    title: "Hardware Ecosystem",
+    desc: "Partnerships with Milesight, TEKTELIC, and Agatel for best-fit device selection.",
   },
 ];
 
