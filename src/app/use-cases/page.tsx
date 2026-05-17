@@ -40,7 +40,7 @@ export default function UseCasesPage() {
             <motion.p variants={fadeUp} className="text-teal text-xl font-heading font-semibold mb-6">
               Your Trusted IoT Platform Partner — Connectivity to Clarity
             </motion.p>
-            <motion.p variants={fadeUp} className="text-text-muted text-lg leading-relaxed">
+            <motion.p variants={fadeUp} className="text-text-muted text-lg leading-relaxed text-justify">
               Anavera offers a diverse portfolio of intelligent monitoring and analytics applications
               designed to address real operational challenges across industrial and enterprise environments.
               By combining multi-application analysis, real-time monitoring, advanced analytics, and

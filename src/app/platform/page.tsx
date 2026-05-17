@@ -85,7 +85,7 @@ export default function PlatformPage() {
               >
                 Platform
               </motion.h1>
-              <motion.p variants={fadeUp} className="text-text-muted text-lg leading-relaxed">
+              <motion.p variants={fadeUp} className="text-text-muted text-lg leading-relaxed text-justify">
                 Anavera delivers a <strong className="text-text font-semibold">standards-based</strong> platform built for secure, scalable, and flexible
                 industrial and enterprise deployments. Available in both <strong className="text-text font-semibold">cloud</strong> and <strong className="text-text font-semibold">on-premises</strong> models,
                 the platform supports seamless integration with third-party applications through <strong className="text-text font-semibold">open
