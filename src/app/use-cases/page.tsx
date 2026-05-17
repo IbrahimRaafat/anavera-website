@@ -41,10 +41,12 @@ export default function UseCasesPage() {
               Your Trusted IoT Platform Partner — Connectivity to Clarity
             </motion.p>
             <motion.p variants={fadeUp} className="text-text-muted text-lg leading-relaxed">
-              Anavera is a leading IoT platform development company delivering end-to-end intelligent IoT
-              solutions across seven industry verticals. We offer our own powerful, cloud-native IoT platform
-              that can be deployed out-of-the-box or fully customized. When clients have unique or specialized
-              requirements, we engineer complete bespoke solutions from the sensor to the cloud.
+              Anavera offers a diverse portfolio of intelligent monitoring and analytics applications
+              designed to address real operational challenges across industrial and enterprise environments.
+              By combining multi-application analysis, real-time monitoring, advanced analytics, and
+              proactive alarm generation, Anavera enables organizations to gain deeper operational
+              visibility, improve decision-making, and optimize performance while reducing operational
+              costs and response time.
             </motion.p>
           </motion.div>
         </div>

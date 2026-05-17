@@ -86,16 +86,12 @@ export default function PlatformPage() {
                 Platform
               </motion.h1>
               <motion.p variants={fadeUp} className="text-text-muted text-lg leading-relaxed">
-                Anavera delivers a standards-based platform designed to provide flexible, scalable, and secure
-                deployment options for modern industrial and enterprise environments. Available as both
-                cloud-based services and on-premises deployments, the Anavera platform enables organizations
-                to choose the infrastructure model that best fits their operational and security requirements.
-                Built with interoperability in mind, the platform supports seamless integration with
-                third-party applications through open integration APIs, allowing customers to extend
-                functionality and unify data across existing systems. To ensure long-term reliability and
-                performance, Anavera also provides comprehensive Annual Maintenance Contracts (AMC) for both
-                cloud and on-premises deployments, delivering continuous support, updates, and system
-                optimization.
+                Anavera delivers a <strong className="text-text font-semibold">standards-based</strong> platform built for secure, scalable, and flexible
+                industrial and enterprise deployments. Available in both <strong className="text-text font-semibold">cloud</strong> and <strong className="text-text font-semibold">on-premises</strong> models,
+                the platform supports seamless integration with third-party applications through <strong className="text-text font-semibold">open
+                APIs</strong> and enables centralized <strong className="text-text font-semibold">multi-tenant management</strong> for multiple customers, sites, and
+                applications. Backed by comprehensive AMC services, Anavera ensures continuous support,
+                updates, and reliable platform performance.
               </motion.p>
             </motion.div>
 

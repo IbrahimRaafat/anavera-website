@@ -48,9 +48,9 @@ export function HeroSection() {
               variants={fadeUp}
               className="text-text-muted text-lg leading-relaxed mb-10"
             >
-              Anavera delivers intelligent IoT platform applications for industrial
-              and enterprise environments — turning sensor streams into the insights
-              your operations can act on.
+              Anavera provides standards-based automation and IIoT platform solutions
+              designed to simplify data monitoring, system integration, and operational
+              analytics for modern industrial and enterprise operations.
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4">

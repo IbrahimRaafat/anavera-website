@@ -28,6 +28,20 @@ const partners = [
     logo: "/3- Agatel-new logo-RGB.png",
     desc: "Agatel specializes in protocol conversion, connectivity bridging, and industrial IoT integration products. Their solutions enable Anavera to integrate legacy wired sensor infrastructure with modern LoRaWAN and cellular networks — making Anavera solutions backward-compatible with existing client investments. Key capabilities include Modbus/BACnet to LoRaWAN protocol converters, LTE-M and NB-IoT cellular gateways, and industrial IoT edge devices for harsh environments.",
   },
+  {
+    name: "Rochester Sensors",
+    url: "https://rochestersensorseurope.com/",
+    urlLabel: "rochestersensorseurope.com",
+    logo: "/rochester-sensors-logo.png",
+    desc: "Rochester Sensors delivers advanced ultrasonic, pressure, and radar level sensing solutions for industrial monitoring applications. With over 110 years of expertise, Rochester Sensors enables reliable real-time monitoring through wired and wireless connectivity technologies including LoRaWAN, cellular, and NB-IoT across oil & gas, water, chemicals, and industrial sectors.",
+  },
+  {
+    name: "SENSAiO",
+    url: "https://sensa.io/",
+    urlLabel: "sensa.io",
+    logo: "/sensaio-logo.png",
+    desc: "SENSAiO is an industrial IoT sensor brand created by Edge Technologies SAS, a French company at the forefront of Industry 4.0 innovation. They specialize in developing intelligent wireless sensors that make industrial operations safer, more efficient, and more sustainable.",
+  },
 ];
 
 export default function HardwareEcosystemPage() {
@@ -54,8 +68,9 @@ export default function HardwareEcosystemPage() {
               Hardware Ecosystem
             </motion.h1>
             <motion.p variants={fadeUp} className="text-text-muted text-lg leading-relaxed">
-              Anavera selects hardware partners based on the highest standards of reliability,
-              interoperability, and suitability for each deployment environment.
+              Anavera cooperates with hardware partners that meet the highest standards of reliability,
+              interoperability, and suitability for diverse deployment environments, ensuring consistent
+              performance across industrial use cases.
             </motion.p>
           </motion.div>
         </div>
@@ -78,20 +93,20 @@ export default function HardwareEcosystemPage() {
                 className="flex flex-col gap-4 p-6 rounded-xl border border-border bg-card hover:border-teal/40 transition-colors duration-300"
               >
                 <div className="flex items-center gap-5">
-                  <div className="h-12 w-36 rounded-lg bg-white flex items-center justify-center px-3 py-2 shrink-0">
+                  <div className="rounded-lg bg-white flex items-center justify-center px-3 py-2 shrink-0">
                     <Image
                       src={partner.logo}
                       alt={partner.name}
                       width={120}
                       height={40}
-                      className="object-contain w-full h-full"
+                      className="max-h-8 max-w-[120px] w-auto h-auto"
                     />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
                       <h2 className="font-heading font-bold text-text text-lg">{partner.name}</h2>
                     </div>
-                    <span className="text-teal text-sm font-heading">{partner.urlLabel}</span>
+                    <a href={partner.url} target="_blank" rel="noopener noreferrer" className="text-teal text-sm font-heading hover:underline">{partner.urlLabel}</a>
                   </div>
                 </div>
                 <p className="text-text-muted leading-relaxed">{partner.desc}</p>
