@@ -1,15 +1,12 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-// Change this to your verified sender domain once you've added anavera.com to Resend.
-// Until then, onboarding@resend.dev works for testing.
 const FROM = "Anavera Website <onboarding@resend.dev>";
 const TO   = "ibrahimrmostafa@gmail.com";
 
 export async function POST(req: Request) {
   try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
     const { name, company, email, useCase, message } = await req.json();
 
     if (!name || !email || !message) {
