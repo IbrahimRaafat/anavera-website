@@ -80,7 +80,7 @@ export default function HardwareEcosystemPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative rounded-2xl overflow-hidden border border-border/50 aspect-video lg:aspect-[4/3]"
           >
-            <Image src="/images/hardware_hero.png" alt="Hardware Ecosystem" fill className="object-cover" />
+            <Image src="/images/hardware_hero.png" alt="Hardware Ecosystem" fill sizes="(max-width: 1024px) 100vw, 50vw" loading="eager" className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-tr from-bg-deep/80 via-transparent to-transparent pointer-events-none" />
           </motion.div>
         </div>
@@ -113,7 +113,8 @@ export default function HardwareEcosystemPage() {
                       alt={partner.name}
                       width={100}
                       height={40}
-                      className="w-[100px] h-auto max-h-8 object-contain" style={{ height: "auto" }}
+                      className="object-contain"
+                      style={{ width: "100px", height: "auto", maxHeight: "32px" }}
                     />
                   </div>
                 </div>
