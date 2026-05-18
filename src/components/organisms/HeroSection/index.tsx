@@ -6,17 +6,9 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/atoms";
 import { fadeUp, staggerContainer } from "@/design-system/animations";
 import DashboardCarousel from "@/components/organisms/DashboardCarousel";
+import { useCases } from "@/data/useCases";
 
-const dashboards = [
-  { src: "/dashboards/overview.png",         label: "Platform Overview" },
-  { src: "/dashboards/power-management.png", label: "Power Management" },
-  { src: "/dashboards/fuel-monitoring.png",  label: "Fuel Monitoring" },
-  { src: "/dashboards/agriculture.png",      label: "Smart Agriculture" },
-  { src: "/dashboards/cold-chain.png",       label: "Cold Chain" },
-  { src: "/dashboards/smart-office.png",     label: "Smart Office" },
-  { src: "/dashboards/smart-hotel.png",      label: "Smart Hotel" },
-  { src: "/dashboards/smart-hospital.png",   label: "Smart Hospital" },
-];
+const dashboards = useCases.map((uc) => ({ src: uc.heroImage, label: uc.shortTitle }));
 
 export function HeroSection() {
   return (
