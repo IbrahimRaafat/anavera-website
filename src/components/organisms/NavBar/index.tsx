@@ -57,9 +57,9 @@ export function NavBar() {
             <Image
               src="/Anavera-Logo.png"
               alt="Anavera — Connectivity to Clarity"
-              width={200}
-              height={58}
-              className="h-14 w-auto object-contain"
+              width={240}
+              height={72}
+              className="h-18 w-auto object-contain"
               priority
             />
           </Link>

@@ -8,16 +8,16 @@ import { fadeUp, staggerContainer } from "@/design-system/animations";
 import DashboardCarousel from "@/components/organisms/DashboardCarousel";
 import { useCases } from "@/data/useCases";
 
-const dashboards = useCases.map((uc) => ({ src: uc.heroImage, label: uc.shortTitle }));
+const dashboards = useCases.map((uc) => ({ src: uc.heroImage, label: uc.shortTitle, slug: uc.slug }));
 
 export function HeroSection() {
   return (
-    <section className="relative lg:min-h-screen flex items-center overflow-hidden bg-white">
+    <section className="relative lg:h-[calc(100vh-5rem)] flex items-center overflow-hidden bg-white">
       <div className="absolute inset-0 bg-grid-pattern pointer-events-none" />
       <div className="absolute inset-0 bg-radial-teal pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-6 pt-6 pb-10 lg:py-32 w-full">
-        <div className="grid lg:grid-cols-[5fr_7fr] gap-10 items-center">
+      <div className="relative max-w-7xl mx-auto px-6 pt-6 pb-10 lg:py-8 w-full">
+        <div className="grid lg:grid-cols-2 gap-10 items-center">
 
           {/* Left — text */}
           <motion.div
@@ -46,14 +46,14 @@ export function HeroSection() {
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
-              <Link href="/applications">
-                <Button size="lg" iconRight={<ArrowRight size={16} />}>
+              <Link href="/applications" className="flex-1">
+                <Button size="lg" iconRight={<ArrowRight size={16} />} className="w-full whitespace-nowrap">
                   Explore our Applications
                 </Button>
               </Link>
-              <Link href="/contact">
-                <Button size="lg" variant="secondary">
-                  Contact Us
+              <Link href="/platform" className="flex-1">
+                <Button size="lg" iconRight={<ArrowRight size={16} />} className="w-full whitespace-nowrap">
+                  Explore our Platform
                 </Button>
               </Link>
             </motion.div>

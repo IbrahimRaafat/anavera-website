@@ -11,7 +11,7 @@ import { fadeUp, staggerContainer, viewport } from "@/design-system/animations";
 import { cn } from "@/lib/cn";
 import { useCaseDropdown } from "@/data/navigation";
 
-type FormState = "idle" | "sending" | "sent";
+type FormState = "idle" | "sending" | "sent" | "error";
 
 function ContactContent() {
   const searchParams = useSearchParams();
@@ -33,8 +33,17 @@ function ContactContent() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setState("sending");
-    await new Promise((r) => setTimeout(r, 1200));
-    setState("sent");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("Failed");
+      setState("sent");
+    } catch {
+      setState("error");
+    }
   }
 
   return (
@@ -106,18 +115,32 @@ function ContactContent() {
                   <div>
                     <p className="font-heading font-bold text-text text-xl mb-2">Message Sent</p>
                     <p className="text-text-muted text-sm leading-relaxed">
-                      Thanks for reaching out. We'll be in touch within 1 business day.
+                      Thanks for reaching out. We'll be in touch soon.
                     </p>
+                  </div>
+                </GlowCard>
+              ) : state === "error" ? (
+                <GlowCard hover={false} className="p-10 flex flex-col items-center text-center gap-6">
+                  <div className="size-16 rounded-full bg-danger/10 border border-danger/30 flex items-center justify-center text-3xl">
+                    ✕
+                  </div>
+                  <div>
+                    <p className="font-heading font-bold text-text text-xl mb-2">Something went wrong</p>
+                    <p className="text-text-muted text-sm leading-relaxed mb-4">
+                      We couldn't send your message. Please try again or email us directly at{" "}
+                      <a href="mailto:info@anavera.com" className="text-teal hover:underline">info@anavera.com</a>.
+                    </p>
+                    <Button variant="secondary" size="md" onClick={() => setState("idle")}>Try Again</Button>
                   </div>
                 </GlowCard>
               ) : (
                 <GlowCard hover={false} className="p-8">
                   <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                     <div className="grid sm:grid-cols-2 gap-5">
-                      <Field label="Full Name" name="name" value={form.name} onChange={handleChange} placeholder="Jane Smith" required />
-                      <Field label="Company" name="company" value={form.company} onChange={handleChange} placeholder="Acme Industries" />
+                      <Field label="Full Name" name="name" value={form.name} onChange={handleChange} required />
+                      <Field label="Company" name="company" value={form.company} onChange={handleChange} />
                     </div>
-                    <Field label="Email Address" name="email" type="email" value={form.email} onChange={handleChange} placeholder="jane@acme.com" required />
+                    <Field label="Email Address" name="email" type="email" value={form.email} onChange={handleChange} required />
 
                     <div className="flex flex-col gap-1.5">
                       <label className="font-heading font-medium text-text text-sm">Use Case Interest</label>
@@ -147,8 +170,7 @@ function ContactContent() {
                         onChange={handleChange}
                         required
                         rows={5}
-                        placeholder="Tell us about your environment, challenge, or what you'd like to achieve..."
-                        className="px-3 py-2.5 rounded-lg bg-bg border border-border text-text text-sm font-body leading-relaxed resize-none focus:outline-none focus:border-teal transition-colors"
+                          className="px-3 py-2.5 rounded-lg bg-bg border border-border text-text text-sm font-body leading-relaxed resize-none focus:outline-none focus:border-teal transition-colors"
                       />
                     </div>
 

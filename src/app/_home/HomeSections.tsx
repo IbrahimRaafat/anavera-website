@@ -46,7 +46,7 @@ function UseCasesGrid() {
             className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
           >
             {useCases.map((uc) => (
-              <motion.div key={uc.slug} variants={fadeUp}>
+              <motion.div key={uc.slug} id={uc.slug} variants={fadeUp} className="scroll-mt-24 rounded-xl">
                 <UseCaseCard useCase={uc} className="h-full" />
               </motion.div>
             ))}
@@ -60,7 +60,7 @@ function UseCasesGrid() {
 /* ─── CTA Banner ─────────────────────────────────────────────────── */
 function CtaBanner() {
   return (
-    <section className="py-32 bg-bg relative overflow-hidden">
+    <section className="py-16 bg-bg relative overflow-hidden">
       <div className="absolute inset-0 bg-radial-teal pointer-events-none" />
       <div className="absolute inset-0 bg-grid-pattern pointer-events-none" />
       <div className="relative max-w-3xl mx-auto px-6 text-center">

@@ -307,8 +307,8 @@ export const useCases: UseCase[] = [
   {
     slug: "hotel",
     number: "07",
-    title: "Hotel Environment Monitoring",
-    shortTitle: "Hotel Environment Monitoring",
+    title: "Smart Hotel",
+    shortTitle: "Smart Hotel",
     icon: "BedDouble",
     tagline: "Elevated Guest Experience & Operational Excellence",
     industry: "hospitality",
@@ -354,8 +354,8 @@ export const useCases: UseCase[] = [
   {
     slug: "hospital",
     number: "08",
-    title: "Hospital Environment Monitoring",
-    shortTitle: "Hospital Environment Monitoring",
+    title: "Smart Hospitals",
+    shortTitle: "Smart Hospitals",
     icon: "HeartPulse",
     tagline: "Connected Healthcare Infrastructure for Patient Safety & Operational Efficiency",
     industry: "healthcare",

@@ -15,7 +15,7 @@ const partners = [
     desc: "Milesight is a global leader in IoT sensing and LoRaWAN connectivity products.",
   },
   {
-    name: "TEKTELIC Communications",
+    name: "Tektelic Communications",
     url: "https://www.tektelic.com",
     urlLabel: "tektelic.com",
     logo: "/2- TEKTELIC logotype.png",
@@ -36,7 +36,7 @@ const partners = [
     desc: "Rochester Sensors delivers advanced ultrasonic, pressure, and radar level sensing solutions for industrial monitoring applications. With over 110 years of expertise, Rochester Sensors enables reliable real-time monitoring through wired and wireless connectivity technologies including LoRaWAN, cellular, and NB-IoT across oil & gas, water, chemicals, and industrial sectors.",
   },
   {
-    name: "SENSAiO",
+    name: "Sensaio",
     url: "https://sensa.io/",
     urlLabel: "sensa.io",
     logo: "/sensaio-logo.png",
@@ -102,21 +102,19 @@ export default function HardwareEcosystemPage() {
                 variants={fadeUp}
                 className="flex flex-col gap-4 p-6 rounded-xl border border-border bg-card hover:border-teal/40 transition-colors duration-300"
               >
-                <div className="flex items-center gap-5">
+                <div className="flex items-center justify-between gap-5">
+                  <div>
+                    <h2 className="font-heading font-bold text-text text-xl tracking-tight">{partner.name}</h2>
+                    <a href={partner.url} target="_blank" rel="noopener noreferrer" className="text-teal text-sm font-heading hover:underline">{partner.urlLabel}</a>
+                  </div>
                   <div className="rounded-lg bg-white flex items-center justify-center px-3 py-2 shrink-0">
                     <Image
                       src={partner.logo}
                       alt={partner.name}
-                      width={120}
+                      width={100}
                       height={40}
-                      className="max-h-8 max-w-[120px] w-auto h-auto"
+                      className="w-[100px] h-auto max-h-8 object-contain" style={{ height: "auto" }}
                     />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h2 className="font-heading font-bold text-text text-lg">{partner.name}</h2>
-                    </div>
-                    <a href={partner.url} target="_blank" rel="noopener noreferrer" className="text-teal text-sm font-heading hover:underline">{partner.urlLabel}</a>
                   </div>
                 </div>
                 <p className="text-text-muted leading-relaxed">{partner.desc}</p>

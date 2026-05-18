@@ -136,6 +136,14 @@ body {
 
 .animate-float { animation: float 4s ease-in-out infinite; }
 
+@keyframes use-case-highlight {
+  0%   { box-shadow: 0 0 0 0px rgba(0,168,181,0.8); }
+  40%  { box-shadow: 0 0 0 5px rgba(0,168,181,0.5), 0 0 24px rgba(0,168,181,0.25); }
+  100% { box-shadow: 0 0 0 0px rgba(0,168,181,0); }
+}
+
+.use-case-highlight { animation: use-case-highlight 2s ease-out forwards; }
+
 .shimmer {
   background: linear-gradient(90deg, transparent 0%, rgba(0,168,181,0.15) 50%, transparent 100%);
   background-size: 200% 100%;

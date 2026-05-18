@@ -3,24 +3,21 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { PageLayout } from "@/components/templates/PageLayout";
-import { UseCaseCard } from "@/components/organisms/UseCaseCard";
-import { useCases } from "@/data/useCases";
+import { useCases, type UseCase } from "@/data/useCases";
 import { fadeUp, staggerContainer, viewport } from "@/design-system/animations";
 import { cn } from "@/lib/cn";
 
+/* ─── Hero slider ─────────────────────────────────────────────────── */
 function HeroSlider({ images }: { images: string[] }) {
   const [index, setIndex] = useState(0);
-
   useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % images.length);
-    }, 4000);
-    return () => clearInterval(timer);
+    const t = setInterval(() => setIndex((p) => (p + 1) % images.length), 4000);
+    return () => clearInterval(t);
   }, [images.length]);
-
   if (!images.length) return null;
-
   return (
     <div className="relative aspect-video lg:aspect-[4/3] rounded-2xl overflow-hidden border border-border/50 shadow-2xl">
       <AnimatePresence mode="wait">
@@ -41,10 +38,7 @@ function HeroSlider({ images }: { images: string[] }) {
           <button
             key={i}
             onClick={() => setIndex(i)}
-            className={cn(
-              "size-2 rounded-full transition-all",
-              i === index ? "bg-teal w-4" : "bg-white/40 hover:bg-white/60"
-            )}
+            className={cn("size-2 rounded-full transition-all", i === index ? "bg-teal w-4" : "bg-white/40 hover:bg-white/60")}
             aria-label={`Go to slide ${i + 1}`}
           />
         ))}
@@ -53,20 +47,123 @@ function HeroSlider({ images }: { images: string[] }) {
   );
 }
 
+/* ─── Data ────────────────────────────────────────────────────────── */
 const stats = [
   { value: "7+",    label: "Industry Verticals" },
   { value: "15km+", label: "LoRaWAN Coverage" },
   { value: "100%",  label: "Customizable Platform" },
 ];
 
-const techStack = [
-  { title: "Connectivity", desc: "LoRaWAN, NB-IoT, LTE-M, Wi-Fi, BLE, Zigbee, wired RS485/Modbus/BACnet" },
-  { title: "Platform",     desc: "Cloud-native IoT with REST APIs, MQTT broker, and real-time data streaming" },
-  { title: "Analytics",    desc: "Built-in dashboards, KPI tracking, predictive analytics, AI/ML integration" },
-  { title: "Integration",  desc: "ERP, SCADA, BMS, CMMS, third-party APIs, legacy systems" },
-  { title: "Security",     desc: "End-to-end AES-128 encryption, device authentication, role-based access" },
-  { title: "Deployment",   desc: "On-premise, private cloud, or public cloud (AWS, Azure, GCP)" },
-];
+
+const industryConfig: Record<string, { label: string; description: string }> = {
+  industrial:  { label: "Industrial",  description: "IoT solutions for energy, fluid management, and critical infrastructure." },
+  agriculture: { label: "Agriculture", description: "Precision farming and smart irrigation powered by real-time sensor data." },
+  commercial:  { label: "Commercial",  description: "Intelligent building management and workplace optimisation." },
+  hospitality: { label: "Hospitality", description: "Connected guest experiences and hotel operations management." },
+  healthcare:  { label: "Healthcare",  description: "Clinical compliance, patient safety, and hospital infrastructure monitoring." },
+};
+
+/* ─── Bento card ──────────────────────────────────────────────────── */
+function BentoCard({ useCase, className }: { useCase: UseCase; className?: string }) {
+  return (
+    <motion.div variants={fadeUp} className={cn("group min-h-[320px]", className)}>
+      <Link
+        href={`/applications/${useCase.slug}`}
+        className="relative flex flex-col justify-end rounded-2xl overflow-hidden h-full border border-border/50 hover:border-teal/40 transition-colors duration-300"
+      >
+        {/* Background image */}
+        {useCase.heroImage && (
+          <div className="absolute inset-0">
+            <Image
+              src={useCase.heroImage}
+              alt={useCase.shortTitle}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/10" />
+          </div>
+        )}
+
+        {/* Number watermark */}
+        <span className="absolute top-4 right-5 font-heading font-bold text-6xl text-white/8 select-none leading-none pointer-events-none">
+          {useCase.number}
+        </span>
+
+        {/* Content */}
+        <div className="relative p-6 flex flex-col gap-3">
+          <h3 className="font-heading font-bold text-white text-xl leading-tight">
+            {useCase.shortTitle}
+          </h3>
+          <p className="text-white/80 text-sm leading-relaxed line-clamp-2">{useCase.tagline}</p>
+          <div className="mt-1">
+            <span className="inline-flex items-center gap-2.5 h-10 px-5 rounded-full bg-teal text-bg font-heading font-semibold text-sm shadow-[0_0_20px_rgba(0,168,181,0.4)] group-hover:shadow-[0_0_28px_rgba(0,168,181,0.55)] transition-all duration-200">
+              Explore
+              <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-1" />
+            </span>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
+  );
+}
+
+/* ─── Industry section with bento grid ───────────────────────────── */
+function IndustrySection({ industryKey, cases }: { industryKey: string; cases: UseCase[] }) {
+  const config = industryConfig[industryKey];
+
+  // Bento span + height classes by position and total count
+  const spanClass = (i: number, total: number) => {
+    if (total === 4) {
+      if (i === 0) return "sm:col-span-2 lg:col-span-2 lg:min-h-[400px]";
+      if (i === 3) return "sm:col-span-2 lg:col-span-2 lg:min-h-[400px]";
+    }
+    if (total === 3) {
+      if (i === 0) return "sm:col-span-2 lg:col-span-2 lg:min-h-[380px]";
+      if (i === 2) return "sm:col-span-2 lg:col-span-3 lg:min-h-[340px]";
+    }
+    return "";
+  };
+
+  const gridClass =
+    cases.length === 1 ? "grid-cols-1" :
+    cases.length === 2 ? "grid-cols-1 sm:grid-cols-2" :
+    "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
+
+  return (
+    <motion.div
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewport}
+      className="flex flex-col gap-5"
+    >
+      {/* Industry header */}
+      <motion.div variants={fadeUp} className="flex items-end justify-between gap-4 pb-4 border-b border-border">
+        <div className="flex flex-col gap-1.5">
+          <h2 className="font-heading font-bold text-3xl text-text">{config.label}</h2>
+          <p className="text-text-muted text-sm">{config.description}</p>
+        </div>
+        <span className="text-xs font-heading text-text-subtle shrink-0">
+          {cases.length} {cases.length === 1 ? "solution" : "solutions"}
+        </span>
+      </motion.div>
+
+      {/* Bento grid */}
+      <div className={cn("grid gap-4", gridClass)}>
+        {cases.map((uc, i) => (
+          <BentoCard key={uc.slug} useCase={uc} className={spanClass(i, cases.length)} />
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+/* ─── Page ────────────────────────────────────────────────────────── */
+const industryOrder = ["industrial", "agriculture", "commercial", "hospitality", "healthcare"] as const;
+
+const groupedByIndustry = industryOrder
+  .map((key) => ({ key, cases: useCases.filter((uc) => uc.industry === key) }))
+  .filter((g) => g.cases.length > 0);
 
 export default function UseCasesPage() {
   return (
@@ -77,10 +174,7 @@ export default function UseCasesPage() {
         <div className="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none" />
         <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
           <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="max-w-xl">
-            <motion.h1
-              variants={fadeUp}
-              className="font-heading font-bold text-4xl sm:text-5xl text-text leading-tight tracking-tight mb-4"
-            >
+            <motion.h1 variants={fadeUp} className="font-heading font-bold text-4xl sm:text-5xl text-text leading-tight tracking-tight mb-4">
               Applications
             </motion.h1>
             <motion.p variants={fadeUp} className="text-teal text-xl font-heading font-semibold mb-6">
@@ -95,38 +189,8 @@ export default function UseCasesPage() {
               costs and response time.
             </motion.p>
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <HeroSlider images={useCases.map(uc => uc.heroImage).filter(Boolean) as string[]} />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Platform Overview Dashboard */}
-      <section className="py-16 bg-bg">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewport} className="flex flex-col gap-6">
-            <motion.p variants={fadeUp} className="text-xs font-heading font-semibold uppercase tracking-widest text-teal">
-              Platform Overview Dashboard
-            </motion.p>
-            <motion.div variants={fadeUp} className="flex flex-col gap-3">
-              <div className="rounded-xl overflow-hidden border border-border">
-                <Image
-                  src="/dashboards/overview.png"
-                  alt="Anavera IoT Platform Overview Dashboard"
-                  width={1200}
-                  height={675}
-                  className="w-full h-auto"
-                />
-              </div>
-              <p className="text-text-muted text-sm text-center italic">
-                Anavera IoT Platform — Overview Dashboard showing all 7 use cases in real-time
-              </p>
-            </motion.div>
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
+            <HeroSlider images={useCases.map((uc) => uc.heroImage).filter(Boolean) as string[]} />
           </motion.div>
         </div>
       </section>
@@ -134,19 +198,9 @@ export default function UseCasesPage() {
       {/* Stats */}
       <section className="py-16 bg-bg">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewport}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4"
-          >
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewport} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {stats.map((s) => (
-              <motion.div
-                key={s.value}
-                variants={fadeUp}
-                className="flex flex-col gap-1 p-5 rounded-xl bg-card border border-border hover:border-teal/40 transition-colors duration-300"
-              >
+              <motion.div key={s.value} variants={fadeUp} className="flex flex-col gap-1 p-5 rounded-xl bg-card border border-border hover:border-teal/40 transition-colors duration-300">
                 <span className="font-heading font-bold text-2xl sm:text-3xl text-gradient-teal">{s.value}</span>
                 <span className="text-text-muted text-sm leading-tight">{s.label}</span>
               </motion.div>
@@ -155,41 +209,12 @@ export default function UseCasesPage() {
         </div>
       </section>
 
-      {/* Technology Stack */}
-      <section className="py-16 bg-bg-deep border-y border-border">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewport} className="flex flex-col gap-8">
-            <motion.p variants={fadeUp} className="text-xs font-heading font-semibold uppercase tracking-widest text-teal">
-              Technology Stack
-            </motion.p>
-            <motion.div variants={fadeUp} className="flex flex-col divide-y divide-border rounded-xl border border-border overflow-hidden">
-              {techStack.map((item) => (
-                <div key={item.title} className="grid sm:grid-cols-[160px_1fr] bg-card px-6 py-4 gap-4">
-                  <p className="font-heading font-semibold text-text text-sm">{item.title}</p>
-                  <p className="text-text-muted text-sm leading-relaxed">{item.desc}</p>
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Use Cases Grid */}
+      {/* Industry bento sections */}
       <section className="py-16 bg-bg">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewport} className="flex flex-col gap-8">
-            <motion.p variants={fadeUp} className="text-xs font-heading font-semibold uppercase tracking-widest text-teal">
-              IoT Use Cases
-            </motion.p>
-            <motion.p variants={fadeUp} className="text-text-muted leading-relaxed max-w-3xl">
-              The following pages present Anavera's IoT solutions across seven key industry verticals. Each use case includes the live platform dashboard view, solution overview, key features, measurable KPIs, hardware used, and value delivered.
-            </motion.p>
-            <motion.div variants={fadeUp} className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {useCases.map((uc) => (
-                <UseCaseCard key={uc.slug} useCase={uc} className="h-full" />
-              ))}
-            </motion.div>
-          </motion.div>
+        <div className="max-w-7xl mx-auto px-6 flex flex-col gap-16">
+          {groupedByIndustry.map(({ key, cases }) => (
+            <IndustrySection key={key} industryKey={key} cases={cases} />
+          ))}
         </div>
       </section>
     </PageLayout>

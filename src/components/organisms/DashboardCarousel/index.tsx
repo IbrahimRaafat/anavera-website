@@ -3,10 +3,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, PanInfo, useMotionValue, useTransform } from "framer-motion";
 import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export interface DashboardItem {
   src: string;
   label: string;
+  slug?: string;
 }
 
 interface Props {
@@ -20,7 +22,9 @@ interface Props {
 const DRAG_BUFFER = 0;
 const VELOCITY_THRESHOLD = 500;
 const GAP = 12;
+const ITEM_HEIGHT = 400;
 const SPRING_OPTIONS = { type: "spring" as const, stiffness: 300, damping: 30 };
+const CLICK_THRESHOLD = 5;
 
 function CarouselItem({
   item, index, itemWidth, trackItemOffset, x, transition,
@@ -38,19 +42,37 @@ function CarouselItem({
     -(index - 1) * trackItemOffset,
   ];
   const rotateY = useTransform(x, range, [45, 0, -45], { clamp: false });
+  const pointerStart = useRef<{ x: number; y: number } | null>(null);
 
   return (
     <motion.div
-      className="relative shrink-0 rounded-xl overflow-hidden border border-border shadow-md cursor-grab active:cursor-grabbing"
-      style={{ width: itemWidth, rotateY }}
+      className="relative shrink-0 rounded-xl overflow-hidden border border-border shadow-md cursor-pointer active:cursor-grabbing"
+      style={{ width: itemWidth, height: ITEM_HEIGHT, rotateY }}
       transition={transition}
+      onPointerDown={(e) => { pointerStart.current = { x: e.clientX, y: e.clientY }; }}
+      onClick={(e) => {
+        if (pointerStart.current) {
+          const dx = Math.abs(e.clientX - pointerStart.current.x);
+          const dy = Math.abs(e.clientY - pointerStart.current.y);
+          if (dx > CLICK_THRESHOLD || dy > CLICK_THRESHOLD) return;
+        }
+        if (item.slug) {
+          const el = document.getElementById(item.slug);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+            el.classList.remove("use-case-highlight");
+            void el.offsetWidth; // force reflow so re-clicking restarts the animation
+            el.classList.add("use-case-highlight");
+            setTimeout(() => el.classList.remove("use-case-highlight"), 2000);
+          }
+        }
+      }}
     >
       <Image
         src={item.src}
         alt={item.label}
-        width={1200}
-        height={675}
-        className="w-full h-auto block"
+        fill
+        className="object-cover"
         draggable={false}
       />
     </motion.div>
@@ -136,6 +158,14 @@ export default function DashboardCarousel({
     setPosition((p) => Math.max(0, Math.min(p + dir, itemsForRender.length - 1)));
   }
 
+  function goPrev() {
+    setPosition((p) => Math.max(0, p - 1));
+  }
+
+  function goNext() {
+    setPosition((p) => Math.min(p + 1, itemsForRender.length - 1));
+  }
+
   const activeIndex = loop
     ? (position - 1 + items.length) % items.length
     : Math.min(position, items.length - 1);
@@ -145,56 +175,77 @@ export default function DashboardCarousel({
     : { left: -trackItemOffset * Math.max(itemsForRender.length - 1, 0), right: 0 };
 
   return (
-    <div
-      ref={wrapperRef}
-      className="w-full overflow-hidden rounded-2xl"
-      onMouseEnter={() => pauseOnHover && setIsHovered(true)}
-      onMouseLeave={() => pauseOnHover && setIsHovered(false)}
-    >
-      {containerWidth > 0 && (
-        <>
-          <div style={{ perspective: 1000, perspectiveOrigin: `${position * trackItemOffset + itemWidth / 2}px 50%` }}>
-            <motion.div
-              className="flex"
-              drag={isAnimating ? false : "x"}
-              dragConstraints={dragConstraints}
-              style={{ width: itemWidth, gap: GAP, x }}
-              animate={{ x: -(position * trackItemOffset) }}
-              transition={effectiveTransition}
-              onDragEnd={handleDragEnd}
-              onAnimationStart={() => setIsAnimating(true)}
-              onAnimationComplete={handleAnimationComplete}
-            >
-              {itemsForRender.map((item, index) => (
-                <CarouselItem
-                  key={`${item.src}-${index}`}
-                  item={item}
-                  index={index}
-                  itemWidth={itemWidth}
-                  trackItemOffset={trackItemOffset}
-                  x={x}
-                  transition={effectiveTransition}
-                />
-              ))}
-            </motion.div>
-          </div>
+    <div className="w-full">
+      {/* Image track */}
+      <div
+        ref={wrapperRef}
+        className="relative w-full overflow-hidden rounded-2xl"
+        onMouseEnter={() => pauseOnHover && setIsHovered(true)}
+        onMouseLeave={() => pauseOnHover && setIsHovered(false)}
+      >
+        {containerWidth > 0 && (
+          <>
+            <div style={{ perspective: 1000, perspectiveOrigin: `${position * trackItemOffset + itemWidth / 2}px 50%` }}>
+              <motion.div
+                className="flex"
+                drag={isAnimating ? false : "x"}
+                dragConstraints={dragConstraints}
+                style={{ width: itemWidth, gap: GAP, x }}
+                animate={{ x: -(position * trackItemOffset) }}
+                transition={effectiveTransition}
+                onDragEnd={handleDragEnd}
+                onAnimationStart={() => setIsAnimating(true)}
+                onAnimationComplete={handleAnimationComplete}
+              >
+                {itemsForRender.map((item, index) => (
+                  <CarouselItem
+                    key={`${item.src}-${index}`}
+                    item={item}
+                    index={index}
+                    itemWidth={itemWidth}
+                    trackItemOffset={trackItemOffset}
+                    x={x}
+                    transition={effectiveTransition}
+                  />
+                ))}
+              </motion.div>
+            </div>
 
-          {/* Dot indicators */}
-          <div className="flex justify-center gap-1.5 mt-4">
-            {items.map((_, i) => (
-              <motion.button
-                key={i}
-                onClick={() => setPosition(loop ? i + 1 : i)}
-                animate={{ scale: activeIndex === i ? 1.2 : 1 }}
-                transition={{ duration: 0.15 }}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  activeIndex === i ? "w-5 bg-teal" : "w-1.5 bg-border"
-                }`}
-                aria-label={items[i].label}
-              />
-            ))}
-          </div>
-        </>
+            <button
+              onClick={goPrev}
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/80 backdrop-blur-sm border border-border p-1.5 shadow-sm hover:bg-white transition-colors"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft size={18} className="text-text" />
+            </button>
+
+            <button
+              onClick={goNext}
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/80 backdrop-blur-sm border border-border p-1.5 shadow-sm hover:bg-white transition-colors"
+              aria-label="Next slide"
+            >
+              <ChevronRight size={18} className="text-text" />
+            </button>
+          </>
+        )}
+      </div>
+
+      {/* Dot indicators */}
+      {containerWidth > 0 && (
+        <div className="flex justify-center gap-1.5 mt-4">
+          {items.map((_, i) => (
+            <motion.button
+              key={i}
+              onClick={() => setPosition(loop ? i + 1 : i)}
+              animate={{ scale: activeIndex === i ? 1.2 : 1 }}
+              transition={{ duration: 0.15 }}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                activeIndex === i ? "w-5 bg-teal" : "w-1.5 bg-border"
+              }`}
+              aria-label={items[i].label}
+            />
+          ))}
+        </div>
       )}
     </div>
   );
