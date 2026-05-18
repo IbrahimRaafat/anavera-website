@@ -102,20 +102,21 @@ export default function HardwareEcosystemPage() {
                 variants={fadeUp}
                 className="flex flex-col gap-4 p-6 rounded-xl border border-border bg-card hover:border-teal/40 transition-colors duration-300"
               >
-                <div className="flex items-center justify-between gap-5">
+                <div className="flex items-start justify-between gap-5">
                   <div>
                     <h2 className="font-heading font-bold text-text text-xl tracking-tight">{partner.name}</h2>
                     <a href={partner.url} target="_blank" rel="noopener noreferrer" className="text-teal text-sm font-heading hover:underline">{partner.urlLabel}</a>
                   </div>
-                  <div className="rounded-lg bg-white flex items-center justify-center px-3 py-2 shrink-0">
-                    <Image
-                      src={partner.logo}
-                      alt={partner.name}
-                      width={100}
-                      height={40}
-                      className="object-contain"
-                      style={{ width: "100px", height: "auto", maxHeight: "32px" }}
-                    />
+                  <div className="rounded-lg bg-white flex items-center justify-center p-3 shrink-0" style={{ width: "120px", height: "56px" }}>
+                    <div className="relative w-[96px] h-[32px]">
+                      <Image
+                        src={partner.logo}
+                        alt={partner.name}
+                        fill
+                        sizes="96px"
+                        className="object-contain"
+                      />
+                    </div>
                   </div>
                 </div>
                 <p className="text-text-muted leading-relaxed">{partner.desc}</p>
