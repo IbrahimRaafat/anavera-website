@@ -10,7 +10,7 @@ import {
   Zap, Gauge, Droplets, Thermometer, Building2, BedDouble, HeartPulse,
 } from "lucide-react";
 import { cn } from "@/lib/cn";
-import { Button, GlowDot } from "@/components/atoms";
+import { Button, GlowDot, PipelineIcon } from "@/components/atoms";
 import { useCaseDropdown } from "@/data/navigation";
 import { slideDown } from "@/design-system/animations";
 
@@ -18,6 +18,7 @@ const iconMap: Record<string, React.ReactNode> = {
   Zap: <Zap size={14} />, Gauge: <Gauge size={14} />, Droplets: <Droplets size={14} />,
   Thermometer: <Thermometer size={14} />, Building2: <Building2 size={14} />,
   BedDouble: <BedDouble size={14} />, HeartPulse: <HeartPulse size={14} />,
+  Pipeline: <PipelineIcon size={14} />,
 };
 
 export function NavBar() {
@@ -91,10 +92,10 @@ export function NavBar() {
               onMouseLeave={() => setDropdownOpen(false)}
             >
               <Link
-                href="/use-cases"
+                href="/applications"
                 className={cn(
                   "flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium font-heading transition-colors",
-                  isActive("/use-cases") ? "text-teal" : "text-text-muted hover:text-text",
+                  isActive("/applications") ? "text-teal" : "text-text-muted hover:text-text",
                 )}
               >
                 Applications
@@ -134,7 +135,7 @@ export function NavBar() {
                       ))}
                     </div>
                     <Link
-                      href="/use-cases"
+                      href="/applications"
                       className="flex items-center justify-center gap-1.5 mt-2 pt-2 border-t border-border text-xs text-text-muted hover:text-teal transition-colors font-heading"
                     >
                       View all Applications →

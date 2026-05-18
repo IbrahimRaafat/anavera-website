@@ -4,14 +4,13 @@ import { motion } from "framer-motion";
 import { Layers, Code2, Radio, GitMerge, BrainCircuit, Headphones, Network, Cpu } from "lucide-react";
 import { PageLayout } from "@/components/templates/PageLayout";
 import { GlowCard } from "@/components/molecules";
-import { Badge } from "@/components/atoms";
 import { fadeUp, staggerContainer, viewport } from "@/design-system/animations";
 import DashboardCarousel from "@/components/organisms/DashboardCarousel";
 
 const dashboards = [
   { src: "/dashboards/overview.png",         label: "Platform Overview" },
   { src: "/dashboards/power-management.png", label: "Power Efficiency Monitoring" },
-  { src: "/dashboards/fuel-monitoring.png",  label: "Tank level & pipeline monitoring" },
+  { src: "/dashboards/fuel-monitoring.png",  label: "Tank Level & Pipeline Monitoring" },
   { src: "/dashboards/agriculture.png",      label: "Smart Irrigation & Agriculture" },
   { src: "/dashboards/cold-chain.png",       label: "Temp. Supply Chain" },
   { src: "/dashboards/smart-office.png",     label: "Smart Office" },
@@ -76,9 +75,6 @@ export default function PlatformPage() {
               initial="hidden"
               animate="visible"
             >
-              <motion.div variants={fadeUp}>
-                <Badge variant="teal" className="mb-6">Platform</Badge>
-              </motion.div>
               <motion.h1
                 variants={fadeUp}
                 className="font-heading font-bold text-4xl sm:text-5xl text-text leading-tight tracking-tight mb-6"

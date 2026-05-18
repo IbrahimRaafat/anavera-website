@@ -1,11 +1,57 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { PageLayout } from "@/components/templates/PageLayout";
 import { UseCaseCard } from "@/components/organisms/UseCaseCard";
 import { useCases } from "@/data/useCases";
 import { fadeUp, staggerContainer, viewport } from "@/design-system/animations";
+import { cn } from "@/lib/cn";
+
+function HeroSlider({ images }: { images: string[] }) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [images.length]);
+
+  if (!images.length) return null;
+
+  return (
+    <div className="relative aspect-video lg:aspect-[4/3] rounded-2xl overflow-hidden border border-border/50 shadow-2xl">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          className="absolute inset-0"
+        >
+          <Image src={images[index]} alt="Anavera Use Case" fill className="object-cover" />
+        </motion.div>
+      </AnimatePresence>
+      <div className="absolute inset-0 bg-gradient-to-tr from-bg-deep/80 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
+        {images.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setIndex(i)}
+            className={cn(
+              "size-2 rounded-full transition-all",
+              i === index ? "bg-teal w-4" : "bg-white/40 hover:bg-white/60"
+            )}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 const stats = [
   { value: "7+",    label: "Industry Verticals" },
@@ -29,8 +75,8 @@ export default function UseCasesPage() {
       <section className="relative py-28 bg-bg-deep overflow-hidden">
         <div className="absolute inset-0 bg-radial-teal opacity-70 pointer-events-none" />
         <div className="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none" />
-        <div className="relative max-w-7xl mx-auto px-6">
-          <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="max-w-3xl">
+        <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+          <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="max-w-xl">
             <motion.h1
               variants={fadeUp}
               className="font-heading font-bold text-4xl sm:text-5xl text-text leading-tight tracking-tight mb-4"
@@ -48,6 +94,14 @@ export default function UseCasesPage() {
               visibility, improve decision-making, and optimize performance while reducing operational
               costs and response time.
             </motion.p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <HeroSlider images={useCases.map(uc => uc.heroImage).filter(Boolean) as string[]} />
           </motion.div>
         </div>
       </section>

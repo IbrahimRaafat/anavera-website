@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { Send, MapPin, Mail, Phone } from "lucide-react";
 import { PageLayout } from "@/components/templates/PageLayout";
@@ -12,9 +13,18 @@ import { useCaseDropdown } from "@/data/navigation";
 
 type FormState = "idle" | "sending" | "sent";
 
-export default function ContactPage() {
+function ContactContent() {
+  const searchParams = useSearchParams();
+  const urlUseCase = searchParams.get("useCase") || "";
+
   const [state, setState] = useState<FormState>("idle");
-  const [form, setForm] = useState({ name: "", company: "", email: "", useCase: "", message: "" });
+  const [form, setForm] = useState({ name: "", company: "", email: "", useCase: urlUseCase, message: "" });
+
+  useEffect(() => {
+    if (urlUseCase) {
+      setForm((prev) => ({ ...prev, useCase: urlUseCase }));
+    }
+  }, [urlUseCase]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -28,7 +38,7 @@ export default function ContactPage() {
   }
 
   return (
-    <PageLayout>
+    <>
       {/* Form + Info */}
       <section className="py-20 bg-bg">
         <div className="max-w-5xl mx-auto px-6">
@@ -157,6 +167,16 @@ export default function ContactPage() {
           </motion.div>
         </div>
       </section>
+    </>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <PageLayout>
+      <Suspense fallback={<div className="py-20 text-center text-text-muted">Loading...</div>}>
+        <ContactContent />
+      </Suspense>
     </PageLayout>
   );
 }

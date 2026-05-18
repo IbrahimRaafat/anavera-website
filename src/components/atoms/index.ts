@@ -5,3 +5,4 @@ export { Text } from "./Text";
 export { GlowDot } from "./GlowDot";
 export { Divider } from "./Divider";
 export { Tag } from "./Tag";
+export { PipelineIcon } from "./PipelineIcon";

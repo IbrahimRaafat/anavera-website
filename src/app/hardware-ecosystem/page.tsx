@@ -51,12 +51,12 @@ export default function HardwareEcosystemPage() {
       <section className="relative py-28 bg-bg-deep overflow-hidden">
         <div className="absolute inset-0 bg-radial-teal opacity-70 pointer-events-none" />
         <div className="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none" />
-        <div className="relative max-w-7xl mx-auto px-6">
+        <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
-            className="max-w-3xl"
+            className="max-w-xl"
           >
             <motion.div variants={fadeUp}>
               <Badge variant="teal" className="mb-6">Hardware Ecosystem</Badge>
@@ -72,6 +72,16 @@ export default function HardwareEcosystemPage() {
               interoperability, and suitability for diverse deployment environments, ensuring consistent
               performance across industrial use cases.
             </motion.p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative rounded-2xl overflow-hidden border border-border/50 aspect-video lg:aspect-[4/3]"
+          >
+            <Image src="/images/hardware_hero.png" alt="Hardware Ecosystem" fill className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-bg-deep/80 via-transparent to-transparent pointer-events-none" />
           </motion.div>
         </div>
       </section>

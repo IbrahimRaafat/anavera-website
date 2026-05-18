@@ -9,9 +9,9 @@ import {
   TrendingDown, TrendingUp, Settings2, Leaf, BrainCircuit,
   ShieldCheck, CircleDollarSign, Clock, ClipboardCheck,
   Users, Maximize2, Package, Route,
-  Heart, LayoutGrid, Star, Shield, MapPin,
+  Heart, LayoutGrid, Star, Shield, MapPin
 } from "lucide-react";
-import { Button, Badge } from "@/components/atoms";
+import { Button, Badge, PipelineIcon } from "@/components/atoms";
 import { fadeUp, staggerContainer, viewport } from "@/design-system/animations";
 import type { UseCase } from "@/data/useCases";
 
@@ -23,6 +23,7 @@ const iconMap: Record<string, React.ReactNode> = {
   Building2:         <Building2 size={28} />,
   BedDouble:         <BedDouble size={28} />,
   HeartPulse:        <HeartPulse size={28} />,
+  Pipeline:          <PipelineIcon size={28} />,
   TrendingDown:      <TrendingDown size={18} />,
   TrendingUp:        <TrendingUp size={18} />,
   Settings2:         <Settings2 size={18} />,
@@ -52,28 +53,42 @@ export function UseCaseDetail({ useCase }: { useCase: UseCase }) {
         <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none" />
         <div className="relative max-w-7xl mx-auto px-6">
           <Link
-            href="/use-cases"
+            href="/applications"
             className="inline-flex items-center gap-2 text-text-muted hover:text-teal text-sm font-heading mb-8 transition-colors"
           >
-            <ArrowLeft size={14} /> Back to Use Cases
+            <ArrowLeft size={14} /> Back to Applications
           </Link>
-          <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="max-w-3xl">
-            <motion.div variants={fadeUp} className="flex items-center gap-3 mb-6">
-              <div className="size-14 rounded-2xl bg-teal/15 border border-teal/30 flex items-center justify-center text-teal">
-                {iconMap[useCase.icon]}
-              </div>
-              <Badge variant="teal" className="capitalize">{useCase.industry}</Badge>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="max-w-2xl">
+              <motion.div variants={fadeUp} className="flex items-center gap-3 mb-6">
+                <div className="size-14 rounded-2xl bg-teal/15 border border-teal/30 flex items-center justify-center text-teal">
+                  {iconMap[useCase.icon]}
+                </div>
+                <Badge variant="teal" className="capitalize">{useCase.industry}</Badge>
+              </motion.div>
+              <motion.p variants={fadeUp} className="text-teal text-sm font-heading font-semibold mb-2 tracking-wide">
+                {useCase.number} | {useCase.title}
+              </motion.p>
+              <motion.h1
+                variants={fadeUp}
+                className="font-heading font-bold text-4xl sm:text-5xl text-text leading-tight tracking-tight mb-4"
+              >
+                {useCase.tagline}
+              </motion.h1>
             </motion.div>
-            <motion.p variants={fadeUp} className="text-teal text-sm font-heading font-semibold mb-2 tracking-wide">
-              {useCase.number} | {useCase.title}
-            </motion.p>
-            <motion.h1
-              variants={fadeUp}
-              className="font-heading font-bold text-4xl sm:text-5xl text-text leading-tight tracking-tight mb-4"
-            >
-              {useCase.tagline}
-            </motion.h1>
-          </motion.div>
+
+            {useCase.heroImage && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="relative rounded-2xl overflow-hidden border border-border/50 aspect-[4/3] lg:aspect-auto lg:h-[400px]"
+              >
+                <Image src={useCase.heroImage} alt={useCase.title} fill className="object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-bg-deep/80 via-transparent to-transparent pointer-events-none" />
+              </motion.div>
+            )}
+          </div>
         </div>
       </section>
 
@@ -226,11 +241,11 @@ export function UseCaseDetail({ useCase }: { useCase: UseCase }) {
               </p>
             </motion.div>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4 justify-center">
-              <Link href="/contact">
+              <Link href={`/contact?useCase=${encodeURIComponent(useCase.title)}`}>
                 <Button size="lg" iconRight={<ArrowRight size={16} />}>Talk to Us</Button>
               </Link>
-              <Link href="/use-cases">
-                <Button size="lg" variant="secondary">All Use Cases</Button>
+              <Link href="/applications">
+                <Button size="lg" variant="secondary">All Applications</Button>
               </Link>
             </motion.div>
           </motion.div>

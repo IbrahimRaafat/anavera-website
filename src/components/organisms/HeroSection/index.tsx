@@ -54,7 +54,7 @@ export function HeroSection() {
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
-              <Link href="/use-cases">
+              <Link href="/applications">
                 <Button size="lg" iconRight={<ArrowRight size={16} />}>
                   Explore our Applications
                 </Button>

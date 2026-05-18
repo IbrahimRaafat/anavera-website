@@ -36,8 +36,8 @@ function UseCasesGrid() {
               heading="Industry Verticals"
               description="Proven IoT applications built with subject matter experts, ready to deploy or fully customisable."
             />
-            <Link href="/use-cases" className="shrink-0">
-              <Button variant="ghost" iconRight={<ArrowRight size={14} />}>All use cases</Button>
+            <Link href="/applications" className="shrink-0">
+              <Button variant="ghost" iconRight={<ArrowRight size={14} />}>All applications</Button>
             </Link>
           </motion.div>
 

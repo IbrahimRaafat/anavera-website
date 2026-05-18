@@ -9,13 +9,14 @@ export interface NavDropdownItem extends NavLink {
 }
 
 export const useCaseDropdown: NavDropdownItem[] = [
-  { label: "Power Efficiency Monitoring",      href: "/use-cases/power-efficiency",   description: "Real-time energy metering & AI demand forecasting",    icon: "Zap" },
-  { label: "Tank level & pipeline monitoring", href: "/use-cases/fuel-monitoring",    description: "Theft detection & predictive refill for remote tanks",  icon: "Gauge" },
-  { label: "Smart Irrigation & Agriculture",   href: "/use-cases/agriculture",        description: "Precision irrigation driven by soil sensors & ML",      icon: "Droplets" },
-  { label: "Temp. Supply Chain",               href: "/use-cases/cold-chain",         description: "End-to-end temperature compliance for perishables",     icon: "Thermometer" },
-  { label: "Smart Office",                     href: "/use-cases/smart-office",       description: "Occupancy, IAQ & energy intelligence for workplaces",   icon: "Building2" },
-  { label: "Hotel Environment Monitoring",     href: "/use-cases/hotel",              description: "Guest-responsive room automation & predictive maint.",  icon: "BedDouble" },
-  { label: "Hospital Environment Monitoring",  href: "/use-cases/hospital",           description: "Clinical environment monitoring & asset tracking",      icon: "HeartPulse" },
+  { label: "Power Efficiency Monitoring",      href: "/applications/power-efficiency",   description: "Real-time energy metering & AI demand forecasting",    icon: "Zap" },
+  { label: "Tank Level Monitoring",            href: "/applications/tank-level-monitoring", description: "Real-time tank visibility & intelligent refill management", icon: "Gauge" },
+  { label: "Pipeline Monitoring",              href: "/applications/pipeline-monitoring",   description: "Real-time leak detection & pipeline integrity monitoring",  icon: "Pipeline" },
+  { label: "Smart Irrigation & Agriculture",   href: "/applications/agriculture",        description: "Precision irrigation driven by soil sensors & ML",      icon: "Droplets" },
+  { label: "Temp. Supply Chain",               href: "/applications/cold-chain",         description: "End-to-end temperature compliance for perishables",     icon: "Thermometer" },
+  { label: "Smart Office",                     href: "/applications/smart-office",       description: "Occupancy, IAQ & energy intelligence for workplaces",   icon: "Building2" },
+  { label: "Hotel Environment Monitoring",     href: "/applications/hotel",              description: "Guest-responsive room automation & predictive maint.",  icon: "BedDouble" },
+  { label: "Hospital Environment Monitoring",  href: "/applications/hospital",           description: "Clinical environment monitoring & asset tracking",      icon: "HeartPulse" },
 ];
 
 export const mainNav: NavLink[] = [

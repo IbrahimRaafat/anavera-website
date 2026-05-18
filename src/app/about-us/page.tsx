@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Building2, Factory, Lightbulb, Settings2 } from "lucide-react";
 import { PageLayout } from "@/components/templates/PageLayout";
 import { Badge } from "@/components/atoms";
@@ -32,17 +33,30 @@ export default function AboutPage() {
       <section className="relative py-28 bg-bg-deep overflow-hidden">
         <div className="absolute inset-0 bg-radial-teal opacity-70 pointer-events-none" />
         <div className="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none" />
-        <div className="relative max-w-7xl mx-auto px-6">
-          <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="max-w-3xl">
+        <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+          <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="max-w-xl">
             <motion.div variants={fadeUp}>
               <Badge variant="teal" className="mb-6">About Anavera</Badge>
             </motion.div>
             <motion.h1
               variants={fadeUp}
-              className="font-heading font-bold text-4xl sm:text-5xl text-text leading-tight tracking-tight"
+              className="font-heading font-bold text-4xl sm:text-5xl text-text leading-tight tracking-tight mb-6"
             >
               About Us
             </motion.h1>
+            <motion.p variants={fadeUp} className="text-text-muted text-lg leading-relaxed">
+              We are focused on delivering intelligent automation and data monitoring platform applications that help organizations improve operational visibility, efficiency, and decision-making.
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative rounded-2xl overflow-hidden border border-border/50 aspect-video lg:aspect-[4/3]"
+          >
+            <Image src="/images/about_us_hero.png" alt="About Anavera" fill className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-bg-deep/80 via-transparent to-transparent pointer-events-none" />
           </motion.div>
         </div>
       </section>
@@ -66,7 +80,7 @@ export default function AboutPage() {
                 <div className="size-11 rounded-lg bg-teal/10 border border-teal/20 flex items-center justify-center text-teal">
                   {item.icon}
                 </div>
-                <p className="text-text-muted leading-relaxed">{item.body}</p>
+                <p className="text-text-muted leading-relaxed text-justify">{item.body}</p>
               </motion.div>
             ))}
           </motion.div>
