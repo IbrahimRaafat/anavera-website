@@ -82,7 +82,7 @@ function PlatformIntro() {
               <span className="text-teal font-medium tracking-wider uppercase text-sm font-space">
                 Core Architecture
               </span>
-              <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-white leading-tight font-space">
+              <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-black leading-tight font-space">
                 A Unified Industrial <br />
                 <span className="bg-gradient-to-r from-teal to-blue-400 bg-clip-text text-transparent">
                   IoT Platform
