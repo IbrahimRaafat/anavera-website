@@ -59,8 +59,7 @@ export function NavBar() {
               alt="Anavera — Connectivity to Clarity"
               width={240}
               height={72}
-              className="h-18 object-contain"
-              style={{ width: "auto" }}
+              className="h-18 w-auto object-contain"
               priority
             />
           </Link>
