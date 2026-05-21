@@ -46,13 +46,8 @@ export function HeroSection() {
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
-              <Link href="/applications" className="flex-1">
-                <Button size="lg" iconRight={<ArrowRight size={16} />} className="w-full whitespace-nowrap">
-                  Explore our Applications
-                </Button>
-              </Link>
-              <Link href="/platform" className="flex-1">
-                <Button size="lg" iconRight={<ArrowRight size={16} />} className="w-full whitespace-nowrap">
+              <Link href="/platform">
+                <Button size="lg" iconRight={<ArrowRight size={16} />} className="whitespace-nowrap">
                   Explore our Platform
                 </Button>
               </Link>

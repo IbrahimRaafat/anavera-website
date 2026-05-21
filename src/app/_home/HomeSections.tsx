@@ -79,9 +79,6 @@ function PlatformIntro() {
             className="lg:col-span-6 flex flex-col gap-8"
           >
             <motion.div variants={fadeUp} className="flex flex-col gap-4">
-              <span className="text-teal font-medium tracking-wider uppercase text-sm font-space">
-                Core Architecture
-              </span>
               <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-black leading-tight font-space">
                 A Unified Industrial <br />
                 <span className="bg-gradient-to-r from-teal to-blue-400 bg-clip-text text-transparent">
@@ -118,7 +115,7 @@ function PlatformIntro() {
               {/* Aspect Ratio Screen Frame */}
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-bg-deep border border-border/50">
                 <Image
-                  src="/images/platform_monitoring.png"
+                  src="/images/platform_monitoring_new.png"
                   alt="Operations specialist monitoring dynamic industrial IoT dashboards on multiple screens"
                   fill
                   sizes="(max-w-768px) 100vw, 50vw"

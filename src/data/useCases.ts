@@ -213,8 +213,8 @@ export const useCases: UseCase[] = [
   {
     slug: "cold-chain",
     number: "05",
-    title: "Temp. Supply Chain",
-    shortTitle: "Temp. Supply Chain",
+    title: "Temperature Integrity Monitoring",
+    shortTitle: "Temperature Integrity Monitoring",
     icon: "Thermometer",
     tagline: "Unbroken Temperature Integrity from Source to Destination",
     industry: "industrial",
