@@ -65,7 +65,7 @@ export const useCases: UseCase[] = [
       { title: "Predictive Insight",     icon: "BrainCircuit",   description: "AI models surface inefficiencies before they become expensive problems." },
     ],
     hardware: ["milesight", "tektelic", "agatel"],
-    heroImage: "/images/uc_power.png",
+    heroImage: "/images/uc_power.jpg",
   },
   {
     slug: "tank-level-monitoring",
