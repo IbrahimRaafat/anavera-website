@@ -255,7 +255,7 @@ export const useCases: UseCase[] = [
       { title: "Full Traceability",     icon: "Route",          description: "End-to-end chain of custody visibility from manufacturer to end point." },
     ],
     hardware: ["tektelic", "milesight", "agatel"],
-    heroImage: "/images/uc_cold.png",
+    heroImage: "/images/uc_cold.jpg",
   },
   {
     slug: "smart-office",
