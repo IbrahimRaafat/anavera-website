@@ -161,7 +161,7 @@ export const useCases: UseCase[] = [
       { title: "Regulatory Compliance",        icon: "ClipboardCheck", description: "Comprehensive audit logs and reporting support environmental and operational compliance requirements." },
     ],
     hardware: ["milesight", "tektelic", "agatel"],
-    heroImage: "/images/uc_pipeline.png",
+    heroImage: "/images/uc_pipeline.jpg",
   },
   {
     slug: "agriculture",
