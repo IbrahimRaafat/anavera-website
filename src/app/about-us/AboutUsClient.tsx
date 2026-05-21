@@ -14,11 +14,11 @@ const story = [
   },
   {
     icon: <Factory size={22} />,
-    body: "In 2025, Anavera expanded into the Industrial IoT (IIoT) space, introducing a standards-based IoT platform combined with adaptive, use case-driven applications designed to address real operational challenges across industrial and enterprise environments.",
+    body: "In 2025, Anavera expanded into the Industrial IoT (IIoT) space, introducing a standards-based IoT platform combined with adaptive, use case-driven applications designed to address real operational challenges across industrial and enterprise environments. Driven by the expertise of its engineering and development teams, Anavera launched multiple industry-focused applications targeting critical operational requirements within industrial environments.",
   },
   {
     icon: <Lightbulb size={22} />,
-    body: "Leveraging the expertise of its development team, Anavera launched four highly demanded use cases, developed in collaboration with subject matter experts to provide the monitoring, analytics, and operational insights most required by modern businesses.",
+    body: "In 2026, the company further expanded its portfolio with specialized solutions for Agriculture, Hospitality, Medical Hospitality, and Building Management Systems (BMS), developed in collaboration with industry experts to deliver actionable insights, analytics, and operational intelligence tailored to modern business demands.",
   },
   {
     icon: <Settings2 size={22} />,
